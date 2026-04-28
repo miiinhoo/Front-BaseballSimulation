@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+:root{
+    --mainFont:'Noto Sans KR', sans-serif;
+}
+// 임시 폰트지정
+*{font-family: var(--mainFont);}
+
+// Views/ title
+// 타이틀창 스타일링
+
+.school-wrap{
+    display: flex;
+
+}
+.school-selector{
+    float: left;
+    width: 50%;
+    text-align: left;
+    max-height: 500px;
+    overflow-y: auto;
+    .region-box{
+        margin-bottom: 20px;
+        h3{
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        ul{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            .school-buttons{
+                padding: 9px 12px;
+                font-size: 0.85rem;
+                font-weight: bold;
+            }
+        }
+    }   
+}
