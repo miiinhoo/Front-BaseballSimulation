@@ -11,7 +11,7 @@ export const UserSettings = () => {
 
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    // 증가 로직
+    // 키,체중 증가 로직
     const handleStart = (type: "height" | "weight", direction: number) => {
         const action = type === "height" ? setHeight : setWeight;
         
@@ -30,7 +30,7 @@ export const UserSettings = () => {
     };
 
     return (
-        <>
+        <div className="Title">
             <h2>선수의 이름을 설정하세요.</h2>
             <input type="text" 
             placeholder="이름 입력" 
@@ -38,15 +38,15 @@ export const UserSettings = () => {
             onChange={(e:React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}/>
             <div className="physical-settings">
                 <div className="input-group">
+                    <ButtonComponent onMouseDown={() => handleStart("height", -1)} onMouseUp={handleStop} onMouseLeave={handleStop}>-</ButtonComponent>
                     <label>키 (cm): {height}</label>
-                    <button onMouseDown={() => handleStart("height", -1)} onMouseUp={handleStop} onMouseLeave={handleStop}>-</button>
-                    <button onMouseDown={() => handleStart("height", 1)} onMouseUp={handleStop} onMouseLeave={handleStop}>+</button>
+                    <ButtonComponent onMouseDown={() => handleStart("height", 1)} onMouseUp={handleStop} onMouseLeave={handleStop}>+</ButtonComponent>
                 </div>
 
                 <div className="input-group">
+                    <ButtonComponent onMouseDown={() => handleStart("weight", -1)} onMouseUp={handleStop} onMouseLeave={handleStop}>-</ButtonComponent>
                     <label>체중 (kg): {weight}</label>
-                    <button onMouseDown={() => handleStart("weight", -1)} onMouseUp={handleStop} onMouseLeave={handleStop}>-</button>
-                    <button onMouseDown={() => handleStart("weight", 1)} onMouseUp={handleStop} onMouseLeave={handleStop}>+</button>
+                    <ButtonComponent onMouseDown={() => handleStart("weight", 1)} onMouseUp={handleStop} onMouseLeave={handleStop}>+</ButtonComponent>
                 </div>
             </div>
             <h2>선수가 다닐 고등학교를 선택하세요.</h2>
@@ -96,6 +96,6 @@ export const UserSettings = () => {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };

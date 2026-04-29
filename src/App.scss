@@ -8,7 +8,37 @@
 
 // Views/ title
 // 타이틀창 스타일링
-
+.Title{ 
+    width: 100%; min-height: 700px;
+    &.Pos{
+        background: url(assets/field.jpg) center center no-repeat;
+        background-size: contain;
+        button{display: block;}
+        .pitcher,.infielder,.outfielder,.catcher,.dh{
+            display: block;
+            width: 50px;
+            height: 50px;
+            background: url(assets/Pitcher.png) center center no-repeat;
+            background-size: 50px 50px;
+        }
+        .infielder{
+            background: url(assets/Infielder.png) center center no-repeat;
+            background-size: 50px 50px;
+        }
+        .outfielder{
+            background: url(assets/Outfielder.png) center center no-repeat;
+            background-size: 50px 50px;
+        }
+        .catcher{
+            background: url(assets/Catcher.png) center center no-repeat;
+            background-size: 50px 50px;
+        }
+        .dh{
+            background: url(assets/DH.png) center center no-repeat;
+            background-size: 50px 50px;
+        }
+    }
+}
 .school-wrap{
     display: flex;
 
