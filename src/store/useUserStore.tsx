@@ -8,9 +8,12 @@ interface User {
     height: number;
     weight: number;
     school: string;
-    pos: "투수" | "타자";
+    pos: "투수" | "타자" | "";
     detailPos: PitcherRole | BatterPos | "";
-    trait: string;
+    throwHand: "RIGHT" | "LEFT";
+    batSide: "RIGHT" | "LEFT" | "SWITCH";
+    pitchingForm?: "OVER" | "THREE" | "SIDE" | "UNDER"; // 타자일 땐 없을 수 있으니 옵셔널
+    playerType: string;
 
     setName: (name: string) => void;
     setHeight: (val: number | ((prev: number) => number)) => void;
@@ -18,26 +21,41 @@ interface User {
     setSchool: (school: string) => void;
     setMainPos: (pos: "투수" | "타자") => void;
     setDetailPos: (pos: PitcherRole | BatterPos) => void;
+    setThrowHand: (hand: "RIGHT" | "LEFT") => void;
+    setBatSide: (side: "RIGHT" | "LEFT" | "SWITCH") => void;
+    setPlayerType: (type: string) => void;
 }
 
 export const useUserStore = create<User>((set) => ({
     name: "",
-    height:0,
-    weight:0,
+    height:180,
+    weight:70,
     school: "",
-    pos: "투수",
+    pos: "",
     detailPos: "",
-    trait: "",
+    throwHand:"LEFT",
+    batSide:"LEFT",
+    playerType: "",
 
     setName: (name) => set({ name }),
-    setHeight: (val) => set((state) => ({ 
-        height: typeof val === 'function' ? val(state.height) : val 
-    })),
-    setWeight: (val) => set((state) => ({ 
-        weight: typeof val === 'function' ? val(state.weight) : val 
-    })),
+    // 키 제한 150 ~ 210
+    setHeight: (val) => set((state) => { 
+        const nextHeight = typeof val === 'function' ? val(state.height) : val;
+        return { 
+            height: Math.max(150, Math.min(210, nextHeight)) 
+        };
+    }),
+    // 체중 제한 50 ~ 150
+    setWeight: (val) => set((state) => {
+        const nextWeight = typeof val === 'function' ? val(state.weight) : val;
+        return { 
+            weight: Math.max(50, Math.min(150, nextWeight)) 
+        };
+    }),
     setSchool: (school) => set({ school }),
     setMainPos: (pos) => set({ pos, detailPos: "" }), 
     setDetailPos: (detailPos) => set({ detailPos }),
- 
+    setThrowHand: (throwHand) => set({ throwHand }),
+    setBatSide: (batSide) => set({ batSide }),
+    setPlayerType: (playerType) => set({ playerType }),
 }))
